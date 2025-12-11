@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container py-4">
+  <h3 class="text-primary mb-4">Appointments</h3>
+
+  <a href="/appointments/add" class="btn btn-primary mb-3">➕ Schedule Appointment</a>
+
+  {% if appointments %}
+  <table class="table table-hover shadow-sm">
+    <thead class="table-primary">
+      <tr>
+        <th>Patient</th>
+        <th>Doctor</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Reason</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for a in appointments %}
+      <tr>
+        <td>{{ a['patient'] }}</td>
+        <td>{{ a['doctor'] }}</td>
+        <td>{{ a['appointment_date'] }}</td>
+        <td>{{ a['appointment_time'] }}</td>
+        <td>{{ a['reason'] }}</td>
+        <td>
+          {% if a['status'] == 'Scheduled' %}
+          <span class="badge bg-info">{{ a['status'] }}</span>
+          {% elif a['status'] == 'Completed' %}
+          <span class="badge bg-success">{{ a['status'] }}</span>
+          {% else %}
+          <span class="badge bg-danger">{{ a['status'] }}</span>
+          {% endif %}
+        </td>
+        <td>
+          <a href="/appointments/update/{{ a['appointment_id'] }}/Completed" class="btn btn-success btn-sm">✔ Complete</a>
+          <a href="/appointments/update/{{ a['appointment_id'] }}/Cancelled" class="btn btn-danger btn-sm">✖ Cancel</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {% else %}
+  <p>No appointments found.</p>
+  {% endif %}
+</div>
+
+{% endblock %}

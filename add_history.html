@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container py-4">
+  <h3 class="text-primary mb-4">
+    Add Medical Record – {{ patient['patient_name'] }}
+  </h3>
+
+  <form method="POST" class="card p-4 shadow-sm">
+
+    <div class="mb-3">
+      <label class="form-label">Visit Date</label>
+      <input type="date" name="visit_date" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Diagnosis</label>
+      <textarea name="diagnosis" class="form-control" rows="2"></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Treatment</label>
+      <textarea name="treatment" class="form-control" rows="3"></textarea>
+    </div>
+
+    <button class="btn btn-success">💾 Save</button>
+    <a href="/history/{{ patient['patient_id'] }}" class="btn btn-secondary ms-2">⬅ Back</a>
+
+  </form>
+</div>
+
+{% endblock %}

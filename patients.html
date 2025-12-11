@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container py-4">
+  <h3 class="text-primary mb-4">Patient Records</h3>
+
+  <a href="/patients/add" class="btn btn-primary mb-3">➕ Add Patient</a>
+
+  {% if patients %}
+  <table class="table table-hover align-middle shadow-sm">
+    <thead class="table-primary">
+      <tr>
+        <th>ID</th><th>Name</th><th>Age</th><th>Gender</th><th>Diagnosis</th><th>Department</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for p in patients %}
+      <tr>
+        <td>{{ p['patient_id'] }}</td>
+        <td>{{ p['patient_name'] }}</td>
+        <td>{{ p['age'] }}</td>
+        <td>{{ p['gender'] }}</td>
+        <td>{{ p['diagnosis'] }}</td>
+        <td>{{ p['department'] }}</td>
+        <td>
+          <a href="/patients/view/{{ p['patient_id'] }}" class="btn btn-info btn-sm text-white">
+  👁 View
+</a>
+<a href="/history/{{ p['patient_id'] }}" class="btn btn-info btn-sm">📜 History</a>
+  <a href="/patients/edit/{{ p['patient_id'] }}" class="btn btn-warning btn-sm">✏ Edit</a>
+  <a href="/patients/delete/{{ p['patient_id'] }}" class="btn btn-danger btn-sm">🗑 Delete</a>
+       </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p>No patient records available.</p>
+  {% endif %}
+</div>
+{% endblock %}
