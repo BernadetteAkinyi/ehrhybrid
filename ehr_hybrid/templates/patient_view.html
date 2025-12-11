@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3 class="text-primary mb-3">🩺 Patient Details</h3>
+
+<div class="card shadow-sm p-4">
+
+  <h4 class="mb-3">{{ patient['patient_name'] }}</h4>
+
+  <p><strong>Age:</strong> {{ patient['age'] }}</p>
+  <p><strong>Gender:</strong> {{ patient['gender'] }}</p>
+  <p><strong>Diagnosis:</strong> {{ patient['diagnosis'] }}</p>
+  <p><strong>Department:</strong> {{ patient['department'] }}</p>
+  <p><strong>Assigned Doctor ID:</strong> {{ patient['assigned_doctor'] }}</p>
+
+  <div class="mt-3 d-flex flex-wrap gap-2">
+    <a href="/patients" class="btn btn-secondary">⬅ Back to List</a>
+    <a href="/patients/edit/{{ patient['patient_id'] }}" class="btn btn-warning">✏ Edit</a>
+    <a href="/patients/{{ patient['patient_id'] }}/history" class="btn btn-info text-white">📚 Medical History</a>
+    <a href="/appointments/patient/{{ patient['patient_id'] }}" class="btn btn-primary">📅 Appointments</a>
+
+    <!-- Emergency Override -->
+    <a href="/patients/emergency_prompt/{{ patient['patient_id'] }}" class="btn btn-danger btn-sm">
+        🚨 Emergency Override
+    </a>
+  </div>
+</div>
+
+{% endblock %}

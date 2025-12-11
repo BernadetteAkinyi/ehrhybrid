@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container py-4">
+  <h3 class="text-primary mb-4">
+    Medical History – {{ patient['patient_name'] }}
+  </h3>
+
+  <a href="/history/add/{{ patient['patient_id'] }}" class="btn btn-success mb-3">
+    ➕ Add Visit Record
+  </a>
+
+  {% if history %}
+  <table class="table table-hover shadow-sm">
+    <thead class="table-primary">
+      <tr>
+        <th>Date</th>
+        <th>Diagnosis</th>
+        <th>Treatment</th>
+        <th>Doctor</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for h in history %}
+      <tr>
+        <td>{{ h['visit_date'] }}</td>
+        <td>{{ h['diagnosis'] }}</td>
+        <td>{{ h['treatment'] }}</td>
+        <td>{{ h['doctor'] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p>No medical history available for this patient.</p>
+  {% endif %}
+</div>
+
+{% endblock %}

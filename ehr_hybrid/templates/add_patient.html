@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container py-4">
+  <h3 class="text-primary mb-3">➕ Add New Patient</h3>
+
+  <form method="POST" action="/patients/add" class="card p-4 shadow-sm">
+    <div class="mb-3">
+      <label class="form-label">Full Name</label>
+      <input type="text" name="patient_name" class="form-control" required>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <label class="form-label">Age</label>
+        <input type="number" name="age" class="form-control" min="0">
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <label class="form-label">Gender</label>
+        <select name="gender" class="form-select">
+          <option value="">-- select --</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <label class="form-label">Department</label>
+        <input type="text" class="form-control" value="{{ user['department'] }}" disabled>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Diagnosis</label>
+      <textarea name="diagnosis" class="form-control" rows="3"></textarea>
+    </div>
+
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary">💾 Save Patient</button>
+      <a href="/patients" class="btn btn-secondary ms-2">Cancel</a>
+    </div>
+  </form>
+</div>
+
+{% endblock %}
